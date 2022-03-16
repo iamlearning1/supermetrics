@@ -89,6 +89,12 @@ export const getStats = async (req: Request, res: Response) => {
             averages[key] = Number((item.chars / item.count).toFixed(2));
         }
 
+        for (const key in avgPostsPerUserPerMonth) {
+            const item = avgPostsPerUserPerMonth[key];
+
+            avgPostsPerUserPerMonth[key] = Number((item / 12).toFixed(2)); 
+        }
+
         return res.json({
             averageNumberOfCharactersByMonth: averages,
             longestPostByCharacterLengthPerMonth: lengths,

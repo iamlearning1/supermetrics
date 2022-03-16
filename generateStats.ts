@@ -94,6 +94,12 @@ const getPosts = async (sl_token: string): Promise<Post[]> => {
             averages[key] = Number((item.chars / item.count).toFixed(2));
         }
 
+        for (const key in avgPostsPerUserPerMonth) {
+            const item = avgPostsPerUserPerMonth[key];
+
+            avgPostsPerUserPerMonth[key] = Number((item / 12).toFixed(2)); 
+        }
+
         fs.writeFileSync(fileName, JSON.stringify({
             averageNumberOfCharactersByMonth: averages,
             longestPostByCharacterLengthPerMonth: lengths,
